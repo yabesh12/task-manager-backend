@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import STATUS_CHOICES
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.filters import SearchFilter
 
 class StatusChoicesView(APIView):
     """
@@ -50,14 +51,19 @@ class TaskViewSet(viewsets.ModelViewSet):
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = TaskPagination
+    filter_backends = [SearchFilter]
+    search_fields = ['title', 'description']
 
     def get_queryset(self):
         """
         Retrieve tasks belonging to the authenticated user.
+        Superadmins can view all tasks.
 
         Returns:
-        - QuerySet: Filtered tasks based on the authenticated user.
+        - QuerySet: Filtered tasks based on the authenticated user or all tasks for superadmins.
         """
+        if self.request.user.is_superuser:
+            return Task.objects.all()
         return Task.objects.filter(owner=self.request.user)
 
     def perform_create(self, serializer):
