@@ -77,6 +77,8 @@ Backend application implemented using Django and Django Rest Framework, with Mon
 
 ### Note
 default super-admin user:-
-username - yabesh
+
+username - yabesh 
+
 password - yabesh
 
