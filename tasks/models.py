@@ -1,11 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 STATUS_CHOICES = [
     ["PENDING", "PENDING"],
     ["INPROGRESS", "INPROGRESS"],
     ["COMPLETED", "COMPLETED"],
-    ["OVERDUE", "OVERDUE"],
 ]
 
 class Task(models.Model):
@@ -17,3 +17,7 @@ class Task(models.Model):
     due_date = models.DateField()
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default="PENDING")
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+    def is_overdue(self):
+        return self.due_date < timezone.now().date()
