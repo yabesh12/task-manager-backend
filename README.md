@@ -50,25 +50,28 @@ Backend application implemented using Django and Django Rest Framework, with Mon
    ```bash
    git clone https://github.com/yabesh12/task-manager-backend.git
 
-2. ```bash
-    cd django-task-manager-backend
-
-3. ```bash
+2. Create Python Virtualenvironment
+    ```bash
     python -m venv venv
 
-4. ```bash
+3. Activate python virtualenvironment:
+    ```bash
     source venv/bin/activate
 
-4. ```bash
+4. Install packages and dependencies:
+    ```bash
     pip install -r requirements.txt
 
-5. ```bash
+5. Apply the Migrations:
+    ```bash
     python manage.py migrate
 
-6. ```bash
+6. Create a Superuser (optional):
+     ```bash
     python manage.py createsuperuser
 
-7. ```bash
+7. Start the development server:
+    ```bash
     python manage.py runserver
 
 
