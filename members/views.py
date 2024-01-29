@@ -78,3 +78,16 @@ class UserLogoutView(APIView):
         logout(request)
 
         return Response({'message': 'Logged out successfully'}, status=status.HTTP_200_OK)
+    
+
+class CurrentUserView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        data = {
+            'id': user.id,
+            'username': user.username,
+            'email': user.email,
+        }
+        return Response(data)

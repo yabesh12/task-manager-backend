@@ -21,3 +21,6 @@ class Task(models.Model):
 
     def is_overdue(self):
         return self.due_date < timezone.now().date()
+    
+    class Meta:
+        ordering = ("-id",)
